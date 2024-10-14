@@ -47,6 +47,31 @@ namespace Weddeberekening
             if (isValidHourlyWage && isValidNumberOfHours)
             {
                 float brutojaarwedde = numberOfHours * hourlyWage;
+                float belasting;
+
+                switch (brutojaarwedde)
+                {
+                    case brutojaarwedde >= 50000:
+                        belasting = 0.50F;
+                        break;
+
+                    case brutojaarwedde >= 25000:
+                        belasting = 0.40F;
+                        break;
+
+                    case brutojaarwedde >= 15000:
+                        belasting = 0.30F;
+                        break;
+
+                    case brutojaarwedde >= 10000:
+                        belasting = 0.20F;
+                        break;
+
+                    default:
+                        belasting = 0;
+                        break;
+                }
+
                 float belasting = brutojaarwedde * 0.30F;
                 float nettojaarwedde = brutojaarwedde - belasting;
                 resultTextBox.Text = $"LOONFICHE VAN {employeeName}\n" +
