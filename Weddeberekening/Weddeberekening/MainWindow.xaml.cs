@@ -47,33 +47,38 @@ namespace Weddeberekening
             if (isValidHourlyWage && isValidNumberOfHours)
             {
                 float brutojaarwedde = numberOfHours * hourlyWage;
-                float belasting;
+                float belasting = 0;
+                float belastbaarInkomen = brutojaarwedde;
 
-                switch (brutojaarwedde)
+                if (belastbaarInkomen >= 50000)
                 {
-                    case brutojaarwedde >= 50000:
-                        belasting = 0.50F;
-                        break;
-
-                    case brutojaarwedde >= 25000:
-                        belasting = 0.40F;
-                        break;
-
-                    case brutojaarwedde >= 15000:
-                        belasting = 0.30F;
-                        break;
-
-                    case brutojaarwedde >= 10000:
-                        belasting = 0.20F;
-                        break;
-
-                    default:
-                        belasting = 0;
-                        break;
+                    belasting += (belastbaarInkomen - 50000) * 0.50F;
                 }
 
-                float belasting = brutojaarwedde * 0.30F;
+                if (belastbaarInkomen > 25000 && belastbaarInkomen < 50000)
+                {
+                    belasting += (belastbaarInkomen - 25000) * 0.40F;
+                }
+
+                if (belastbaarInkomen > 15000 && belastbaarInkomen <= 25000)
+                {
+                    belasting += (belastbaarInkomen - 25000) * 0.30F;
+                }
+
+                if (belastbaarInkomen > 10000 & belastbaarInkomen <= 15000)
+                {
+                    belasting += (belastbaarInkomen - 15000) * 0.20F;
+                }
+
+                if (belastbaarInkomen <= 10000)
+                {
+                    belasting += 0;
+                }
+
+
                 float nettojaarwedde = brutojaarwedde - belasting;
+
+
                 resultTextBox.Text = $"LOONFICHE VAN {employeeName}\n" +
                 $"\n" +
                 $"Aantal gewerkte uren: {numberOfHours}\n" +
@@ -81,6 +86,7 @@ namespace Weddeberekening
                 $"Brutojaarwedde: € {brutojaarwedde:N2}\n" +
                 $"Belasting: € {belasting:N2}\n" +
                 $"Nettojaarwedde: € {nettojaarwedde:N2}";
+
             } else
             {
                 resultTextBox.Text = "Invalid input.";
