@@ -53,28 +53,27 @@ namespace Weddeberekening
                 if (belastbaarInkomen >= 50000)
                 {
                     belasting += (belastbaarInkomen - 50000) * 0.50F;
+                    belastbaarInkomen = 50000;
+
                 }
 
-                if (belastbaarInkomen > 25000 && belastbaarInkomen < 50000)
+                if (belastbaarInkomen > 25000)
                 {
                     belasting += (belastbaarInkomen - 25000) * 0.40F;
+                    belastbaarInkomen = 25000;
                 }
 
-                if (belastbaarInkomen > 15000 && belastbaarInkomen <= 25000)
+                if (belastbaarInkomen > 15000)
                 {
-                    belasting += (belastbaarInkomen - 25000) * 0.30F;
+                    belasting += (belastbaarInkomen - 15000) * 0.30F;
+                    belastbaarInkomen = 15000;
                 }
 
-                if (belastbaarInkomen > 10000 & belastbaarInkomen <= 15000)
+                if (belastbaarInkomen > 10000)
                 {
-                    belasting += (belastbaarInkomen - 15000) * 0.20F;
+                    belasting += (belastbaarInkomen - 10000) * 0.20F;
+                    belastbaarInkomen = 10000;
                 }
-
-                if (belastbaarInkomen <= 10000)
-                {
-                    belasting += 0;
-                }
-
 
                 float nettojaarwedde = brutojaarwedde - belasting;
 
